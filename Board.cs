@@ -23,7 +23,7 @@ namespace TicTacToe {
                 {"7", "8", "9" }
             };
 
-            Console.WriteLine($"\n win? = {checkForWinForSymbol(this.board, 'X')}" );
+            //Console.WriteLine($"\n win? = {checkForWinForSymbol(this.board, 'X')}" );
         }
 
         private string[,] colorBord(string[,] board) {
@@ -68,19 +68,19 @@ namespace TicTacToe {
 
         public void ShowBoard() {
             string[,] coloredBoard = colorBord(this.board);
-            Console.Write(generateBoradString(coloredBoard));
+            //Console.Write(generateBoradString(coloredBoard));
         }
 
         private bool checkForWinForSymbol(string[,] board, char symbol) {
 
             // Horizontal lines
-            Console.Write("horizontal lines");
+            //Console.Write("horizontal lines");
             bool win=false;
             for (int i = 0; i < board.GetLength(0); i++) {
-                Console.Write("\nchecking row: ");
+                //Console.Write("\nchecking row: ");
                 win = true;
                 for (int j = 0; j < board.GetLength(1); j++) {
-                    Console.Write($"\t{board[i, j]}");
+                    //Console.Write($"\t{board[i, j]}");
                     if (board[i, j] != symbol.ToString()) {
                         win = false;
                         break;
@@ -92,12 +92,12 @@ namespace TicTacToe {
             }
 
             // Vertical Lines
-            Console.Write("\nvertical lines");
+            //Console.Write("\nvertical lines");
             for (int i = 0; i < board.GetLength(1); i++) {
                 win = true;
-                Console.Write("\nchecking column: ");
+                //Console.Write("\nchecking column: ");
                 for (int j = 0; j < board.GetLength(0); j++) {
-                    Console.Write($"\t{board[j,i]}");
+                    //Console.Write($"\t{board[j,i]}");
                     if (board[j, i] != symbol.ToString()) {
                         win = false;
                         break;
@@ -110,13 +110,13 @@ namespace TicTacToe {
 
 
             // Diagonal
-            Console.Write("\nDiagonal lines");
+            //Console.Write("\nDiagonal lines");
             if (board.GetLength(0) != board.GetLength(1)) {
                 throw new Exception($"board has to be squre (instead it is {board.GetLength(0)} x {board.GetLength(1)})");
             }
             win = true;
             for (int i = 0; i < board.GetLength(0); i++) {
-                Console.Write($"\t{board[i, i]}");
+                //Console.Write($"\t{board[i, i]}");
                 if (board[i, i] != symbol.ToString()) {
                     win = false;
                     break;
@@ -128,7 +128,7 @@ namespace TicTacToe {
 
             win = true;
             for (int i = 0; i < board.GetLength(0); i++) {
-                Console.Write($"\t{board[i, board.GetLength(0)-1-i]}");
+                //Console.Write($"\t{board[i, board.GetLength(0)-1-i]}");
                 if (board[i, board.GetLength(0)-1-i] != symbol.ToString()) {
                     win = false;
                     break;

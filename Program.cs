@@ -1,10 +1,10 @@
 ﻿namespace TicTacToe {
     internal class Program {
         static void Main(string[] args) {
-            Console.WriteLine("Hello, World!");
+            Game game = new Game();
+            game.MainLoop();
 
-            Board board = new Board();
-            board.ShowBoard();
+            
         }
     }
 }
