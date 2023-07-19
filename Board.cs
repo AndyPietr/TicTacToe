@@ -5,17 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace TicTacToe {
-    internal class Board {
-        private string[,] board;
-        
 
-        public Board()
-        {
+    public enum GameResult {
+        X_Win,
+        O_Win,
+        Draw,
+        NoVictory
+    }
+    public class Board {
+        private string[,] board;
+
+
+        public Board() {
             this.board = new string[,]{
-                {"X", "2", "3"},
-                {"4", "O", "6" },
+                {"1", "2", "3"},
+                {"4", "5", "6" },
                 {"7", "8", "9" }
             };
+
+            Console.WriteLine($"\n win? = {checkForWinForSymbol(this.board, 'X')}" );
         }
 
         private string[,] colorBord(string[,] board) {
@@ -28,9 +36,9 @@ namespace TicTacToe {
 
             for (int i = 0; i < board_colored.GetLength(0); i++) {
                 for (int j = 0; j < board_colored.GetLength(1); j++) {
-                    if (board[i,j] == "X") {
+                    if (board[i, j] == "X") {
                         board_colored[i, j] = $"{Color.Blue}{board[i, j]}{Color.Rst}";
-                    } 
+                    }
                     else if (board[i, j] == "O") {
                         board_colored[i, j] = $"{Color.Green}{board[i, j]}{Color.Rst}";
                     }
@@ -46,13 +54,13 @@ namespace TicTacToe {
         private string generateBoradString(string[,] board) {
             string[,] b = board;
 
-            string output ="";
+            string output = "";
             output += string.Format(" {0} | {1} | {2} \n", " ", " ", " ");
-            output += string.Format(" {0} | {1} | {2} \n", b[0,0], b[0, 1], b[0,2]);
+            output += string.Format(" {0} | {1} | {2} \n", b[0, 0], b[0, 1], b[0, 2]);
             output += string.Format("---|---|---\n");
-            output += string.Format(" {0} | {1} | {2} \n", b[1,0], b[1, 1], b[1,2]);
+            output += string.Format(" {0} | {1} | {2} \n", b[1, 0], b[1, 1], b[1, 2]);
             output += string.Format("---|---|---\n");
-            output += string.Format(" {0} | {1} | {2} \n", b[2,0], b[2, 1], b[2,2]);
+            output += string.Format(" {0} | {1} | {2} \n", b[2, 0], b[2, 1], b[2, 2]);
             output += string.Format(" {0} | {1} | {2} \n", " ", " ", " ");
 
             return output;
@@ -62,5 +70,56 @@ namespace TicTacToe {
             string[,] coloredBoard = colorBord(this.board);
             Console.Write(generateBoradString(coloredBoard));
         }
+
+        private bool checkForWinForSymbol(string[,] board, char symbol) {
+
+            // Horizontal lines
+            Console.Write("horizontal lines");
+            bool win=false;
+            for (int i = 0; i < board.GetLength(0); i++) {
+                Console.Write("\nchecking row: ");
+                win = true;
+                for (int j = 0; j < board.GetLength(1); j++) {
+                    Console.Write($"\t{board[i, j]}");
+                    if (board[i, j] != symbol.ToString()) {
+                        win = false;
+                        break;
+                    }
+                }
+                if (win==true) {
+                    return true;
+                }
+            }
+
+            // Vertical Lines
+            Console.Write("\nvertical lines");
+            for (int i = 0; i < board.GetLength(1); i++) {
+                win = true;
+                Console.Write("\nchecking column: ");
+                for (int j = 0; j < board.GetLength(0); j++) {
+                    Console.Write($"\t{board[j,i]}");
+                    if (board[j, i] != symbol.ToString()) {
+                        win = false;
+                        break;
+                    }
+                }
+                if (win == true) {
+                    return true;
+                }
+            }
+            
+            
+            // Diagonal
+
+            return false;
+        }
+
+        public GameResult GetGameResult(string[,] board) {
+            return GameResult.NoVictory;
+        }
+
     }
+
+
+
 }
