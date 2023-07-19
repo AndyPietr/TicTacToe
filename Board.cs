@@ -107,14 +107,64 @@ namespace TicTacToe {
                     return true;
                 }
             }
-            
-            
+
+
             // Diagonal
+            Console.Write("\nDiagonal lines");
+            if (board.GetLength(0) != board.GetLength(1)) {
+                throw new Exception($"board has to be squre (instead it is {board.GetLength(0)} x {board.GetLength(1)})");
+            }
+            win = true;
+            for (int i = 0; i < board.GetLength(0); i++) {
+                Console.Write($"\t{board[i, i]}");
+                if (board[i, i] != symbol.ToString()) {
+                    win = false;
+                    break;
+                }
+            }
+            if (win == true) {
+                return true;
+            }
+
+            win = true;
+            for (int i = 0; i < board.GetLength(0); i++) {
+                Console.Write($"\t{board[i, board.GetLength(0)-1-i]}");
+                if (board[i, board.GetLength(0)-1-i] != symbol.ToString()) {
+                    win = false;
+                    break;
+                }
+            }
+            if (win == true) {
+                return true;
+            }
 
             return false;
         }
 
+        private bool isBoardFilled(string[,] board) {
+
+            bool isFull = true;
+            foreach (var item in board) {
+                if (! ( item == 'X'.ToString() || item == 'O'.ToString() ) ) {
+                    isFull = false;
+                    break;
+                }
+            }
+            return isFull;
+        }
+
         public GameResult GetGameResult(string[,] board) {
+
+            if (checkForWinForSymbol(board, 'X')) {
+                return GameResult.X_Win;
+            }
+            else if (checkForWinForSymbol(board, 'O')) {
+                return GameResult.O_Win;
+            }
+            else if (isBoardFilled(board)) {
+                return GameResult.Draw;
+            }
+
             return GameResult.NoVictory;
         }
 
