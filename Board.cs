@@ -26,6 +26,8 @@ namespace TicTacToe {
             //Console.WriteLine($"\n win? = {checkForWinForSymbol(this.board, 'X')}" );
         }
 
+        
+
         private string[,] colorBord(string[,] board) {
             string[,] board_colored = new string[3, 3];
             //{
@@ -66,9 +68,10 @@ namespace TicTacToe {
             return output;
         }
 
-        public void ShowBoard() {
+        public void ShowBoard() { 
+            // TODO allow custom indentation
             string[,] coloredBoard = colorBord(this.board);
-            //Console.Write(generateBoradString(coloredBoard));
+            Console.Write(generateBoradString(coloredBoard));
         }
 
         private bool checkForWinForSymbol(string[,] board, char symbol) {
@@ -153,7 +156,7 @@ namespace TicTacToe {
             return isFull;
         }
 
-        public GameResult GetGameResult(string[,] board) {
+        public GameResult GetGameResult(string[,] board ) {
 
             if (checkForWinForSymbol(board, 'X')) {
                 return GameResult.X_Win;
@@ -166,6 +169,16 @@ namespace TicTacToe {
             }
 
             return GameResult.NoVictory;
+        }
+
+        public GameResult GetGameResult() { 
+            return GetGameResult(this.board);
+        }
+
+
+        public bool UpdateBoard(string symbol, int where) {
+
+            return true;
         }
 
     }
