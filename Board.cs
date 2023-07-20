@@ -177,6 +177,20 @@ namespace TicTacToe {
 
 
         public bool UpdateBoard(string symbol, int where) {
+            if (symbol != "X" && symbol != "O") {
+                throw new ArgumentException($"Board can only be updated with 'X' or 'O' symbol, given '{symbol}'");
+            }
+            if (where < 0 || where > 8) {
+                throw new ArgumentException($"Board has only 0 to 9 indexes, given idx: '{where}'");
+            }
+
+            string current_symbol = this.board[where / 3, where % 3];
+            if (current_symbol == "X" || current_symbol== "O") {
+                return false;
+            }
+            else {
+                this.board[where / 3, where % 3] = symbol;
+            }
 
             return true;
         }
